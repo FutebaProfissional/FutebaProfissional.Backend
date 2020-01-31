@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace FutebaProfissional.WebApi
+namespace FutebaProfissiona.Api
 {
     public class Program
     {
