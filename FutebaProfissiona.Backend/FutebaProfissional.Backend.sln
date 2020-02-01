@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutebaProfissional.Api", "FutebaProfissiona.Api\FutebaProfissional.Api.csproj", "{F0611314-92BF-421B-8E5A-D7CE73DABEED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FutebaProfissional.Api", "FutebaProfissiona.Api\FutebaProfissional.Api.csproj", "{F0611314-92BF-421B-8E5A-D7CE73DABEED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutebaProfissional.Repositories", "FutebaProfissional.Repositories\FutebaProfissional.Repositories.csproj", "{658722ED-ABCF-4ED3-AF19-F4D222DB71B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FutebaProfissional.Repositories", "FutebaProfissional.Repositories\FutebaProfissional.Repositories.csproj", "{658722ED-ABCF-4ED3-AF19-F4D222DB71B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutebaProfissional.Domain", "FutebaProfissional.Domain\FutebaProfissional.Domain.csproj", "{F7D4D339-7DB4-43CB-B646-37121E51896A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FutebaProfissional.Domain", "FutebaProfissional.Domain\FutebaProfissional.Domain.csproj", "{F7D4D339-7DB4-43CB-B646-37121E51896A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutebaProfissional.Services", "FutebaProfissional.Services\FutebaProfissional.Services.csproj", "{DFE22D8D-B537-4864-9C4D-32A08C7AE89A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FutebaProfissional.Services", "FutebaProfissional.Services\FutebaProfissional.Services.csproj", "{DFE22D8D-B537-4864-9C4D-32A08C7AE89A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FutebaProfissional.Security", "FutebaProfissional.Security\FutebaProfissional.Security.csproj", "{6BD2B6A7-AABB-49D1-93FC-97C434A77C97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DFE22D8D-B537-4864-9C4D-32A08C7AE89A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFE22D8D-B537-4864-9C4D-32A08C7AE89A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFE22D8D-B537-4864-9C4D-32A08C7AE89A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BD2B6A7-AABB-49D1-93FC-97C434A77C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BD2B6A7-AABB-49D1-93FC-97C434A77C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BD2B6A7-AABB-49D1-93FC-97C434A77C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BD2B6A7-AABB-49D1-93FC-97C434A77C97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,16 +1,16 @@
 using AutoMapper;
 using FutebaProfissional.Domain.Profiles;
-using FutebaProfissional.Repositories.Abstractions;
 using FutebaProfissional.Repositories.Context;
-using FutebaProfissional.Repositories.Repositories;
-using FutebaProfissional.Services;
-using FutebaProfissional.Services.Abstractions;
+using FutebaProfissional.Repositories.Models;
+using FutebaProfissional.Security;
 using FutebaProfissional.Services.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace FutebaProfissiona.Api
 {
@@ -30,6 +30,24 @@ namespace FutebaProfissiona.Api
             services.AddDbContext<FutebaDbContext>();
             RegisterIoC.Register(services);
             ConfigureAutoMapper(services);
+            ConfigureSecurity(services);
+            services.AddCors();
+        }
+
+        private void ConfigureSecurity(IServiceCollection services)
+        {
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<FutebaDbContext>()
+                .AddDefaultTokenProviders();
+            services.AddScoped<AccessManager>();
+            var signingConfigurations = new SigningConfigurations();
+            services.AddSingleton(signingConfigurations);
+            var tokenConfigurations = new TokenConfigurations();
+            new ConfigureFromConfigurationOptions<TokenConfigurations>(
+                Configuration.GetSection("TokenConfigurations"))
+                    .Configure(tokenConfigurations);
+            services.AddSingleton(tokenConfigurations);
+            services.AddJwtSecurity(signingConfigurations, tokenConfigurations);
         }
 
         private static void ConfigureAutoMapper(IServiceCollection services)

@@ -27,7 +27,7 @@ namespace FutebaProfissiona.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<GroupViewModel>> Get(Guid id)
+        public ActionResult<List<GroupViewModel>> Get()
         {
             return Ok(_service.GetAll());
         }
