@@ -7,12 +7,12 @@ namespace FutebaProfissional.Security
 {
     public class IdentityInitializer
     {
-        private readonly ApplicationDbContext _context;
+        private readonly FutebaDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
         public IdentityInitializer(
-            ApplicationDbContext context,
+            FutebaDbContext context,
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager)
         {

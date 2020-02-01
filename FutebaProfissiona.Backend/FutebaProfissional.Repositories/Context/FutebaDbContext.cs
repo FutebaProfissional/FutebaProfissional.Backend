@@ -17,6 +17,7 @@ namespace FutebaProfissional.Repositories.Context
         }
 
         public DbSet<Group> Groups { get; set; }
+        public DbSet<ApplicationUser> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
