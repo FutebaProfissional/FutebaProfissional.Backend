@@ -4,6 +4,7 @@ using FutebaProfissional.Repositories.Context;
 using FutebaProfissional.Repositories.Models;
 using FutebaProfissional.Security;
 using FutebaProfissional.Services.IoC;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -28,6 +29,7 @@ namespace FutebaProfissiona.Api
         {
             services.AddControllers();
             services.AddDbContext<FutebaDbContext>();
+            services.AddDbContext<ApplicationDbContext>();
             RegisterIoC.Register(services);
             ConfigureAutoMapper(services);
             ConfigureSecurity(services);
@@ -37,7 +39,7 @@ namespace FutebaProfissiona.Api
         private void ConfigureSecurity(IServiceCollection services)
         {
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<FutebaDbContext>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             services.AddScoped<AccessManager>();
             var signingConfigurations = new SigningConfigurations();
@@ -48,6 +50,16 @@ namespace FutebaProfissiona.Api
                     .Configure(tokenConfigurations);
             services.AddSingleton(tokenConfigurations);
             services.AddJwtSecurity(signingConfigurations, tokenConfigurations);
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+            });
         }
 
         private static void ConfigureAutoMapper(IServiceCollection services)
@@ -64,7 +76,7 @@ namespace FutebaProfissiona.Api
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
-            FutebaDbContext context,
+            ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager)
         {
@@ -72,16 +84,12 @@ namespace FutebaProfissiona.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            new IdentityInitializer(context, userManager, roleManager)
-                .Initialize();
+            IdentityInitializer.SeedData(userManager, roleManager);
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

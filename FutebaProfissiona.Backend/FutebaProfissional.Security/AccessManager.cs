@@ -30,12 +30,12 @@ namespace FutebaProfissional.Security
         public bool ValidateCredentials(User user)
         {
             bool credenciaisValidas = false;
-            if (user != null && !String.IsNullOrWhiteSpace(user.UserID))
+            if (user != null && !String.IsNullOrWhiteSpace(user.Email))
             {
                 // Verifica a existência do usuário nas tabelas do
                 // ASP.NET Core Identity
                 var userIdentity = _userManager
-                    .FindByNameAsync(user.UserID).Result;
+                    .FindByEmailAsync(user.Email).Result;
                 if (userIdentity != null)
                 {
                     // Efetua o login com base no Id do usuário e sua senha
@@ -47,7 +47,7 @@ namespace FutebaProfissional.Security
                         // Verifica se o usuário em questão possui
                         // a role Acesso-APIProdutos
                         credenciaisValidas = _userManager.IsInRoleAsync(
-                            userIdentity, Roles.ADMIN_MASTER).Result;
+                            userIdentity, "Admin").Result;
                     }
                 }
             }
@@ -58,10 +58,10 @@ namespace FutebaProfissional.Security
         public Token GenerateToken(User user)
         {
             ClaimsIdentity identity = new ClaimsIdentity(
-                new GenericIdentity(user.UserID, "Login"),
+                new GenericIdentity(user.Email, "Login"),
                 new[] {
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                        new Claim(JwtRegisteredClaimNames.UniqueName, user.UserID)
+                        new Claim(JwtRegisteredClaimNames.UniqueName, user.Email)
                 }
             );
 
@@ -73,7 +73,7 @@ namespace FutebaProfissional.Security
             var securityToken = handler.CreateToken(new SecurityTokenDescriptor
             {
                 Issuer = _tokenConfigurations.Issuer,
-                Audience = _tokenConfigurations.Audience,
+                //Audience = _tokenConfigurations.Audience,
                 SigningCredentials = _signingConfigurations.SigningCredentials,
                 Subject = identity,
                 NotBefore = dataCriacao,

@@ -11,13 +11,12 @@ namespace FutebaProfissional.Repositories.Context
     {
         private readonly IConfiguration _configuration;
 
-        public FutebaDbContext(DbContextOptions options, IConfiguration configuration) : base(options)
+        public FutebaDbContext(DbContextOptions<FutebaDbContext> options, IConfiguration configuration) : base(options)
         {
             _configuration = configuration;
         }
 
         public DbSet<Group> Groups { get; set; }
-        public DbSet<ApplicationUser> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
