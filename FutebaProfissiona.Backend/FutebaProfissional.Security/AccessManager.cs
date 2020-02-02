@@ -73,7 +73,7 @@ namespace FutebaProfissional.Security
             var securityToken = handler.CreateToken(new SecurityTokenDescriptor
             {
                 Issuer = _tokenConfigurations.Issuer,
-                //Audience = _tokenConfigurations.Audience,
+                Audience = _tokenConfigurations.Audience,
                 SigningCredentials = _signingConfigurations.SigningCredentials,
                 Subject = identity,
                 NotBefore = dataCriacao,

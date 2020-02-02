@@ -31,9 +31,10 @@ namespace FutebaProfissiona.Api
             services.AddDbContext<FutebaDbContext>();
             services.AddDbContext<ApplicationDbContext>();
             RegisterIoC.Register(services);
-            ConfigureAutoMapper(services);
             ConfigureSecurity(services);
+            ConfigureAutoMapper(services);
             services.AddCors();
+            services.AddMvc();
         }
 
         private void ConfigureSecurity(IServiceCollection services)
